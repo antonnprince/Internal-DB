@@ -2,6 +2,7 @@ import React from 'react'
 import { auth,db } from '../firebase.js'
 import { createUserWithEmailAndPassword  } from 'firebase/auth'
 import {doc, setDoc} from "firebase/firestore"
+import axios from 'axios'
 
 const Register = () => {
     const [email,setEmail] = useState("")
@@ -18,10 +19,11 @@ const Register = () => {
         window.location.href="/profile"
         if(user)
             {
-                await setDoc(doc(db,"Users",user.uid), {
-                    name:name,
-                    email:user.email
-                })        
+                try {
+                    axios.post('localhost:5500')
+                } catch (error) {
+                    console.log(error)
+                }
             }
 
             

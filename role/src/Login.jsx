@@ -20,21 +20,23 @@ const Login = () => {
   }
   return (
     <div>
-        <h1>Enter email</h1>
+        <h2>Enter email</h2>
         <input type='email' onChange={(e)=>setEmail(e.target.value)}/>
 
-        <h1>Enter Password</h1>
+        <h2>Enter Password</h2>
         <input type='password' onChange={(e)=>setPass(e.target.value)}/>
 
-      <button onClick={handleLogin}>
-        Login
-      </button>
+      <div className=''>
+              <button onClick={handleLogin} className='m-4'>
+                Login
+              </button>
 
-      <button>
-        <Link to="/register">
-        Register
-        </Link>
-      </button>
+              <button>
+                <Link to="/register">
+                Register
+                </Link>
+              </button>
+        </div>
     </div>
   )
 }

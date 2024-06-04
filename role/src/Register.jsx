@@ -27,19 +27,21 @@ const Register = () => {
 
   return (
     <div>
-        <h1>Enter email</h1>
+        <h2>Enter email</h2>
         <input type='email' onChange={(e)=>setEmail(e.target.value)}/>
 
 
-        <h1>Enter Name</h1>
+        <h2>Enter Name</h2>
         <input type='text' onChange={(e)=>setName(e.target.value)}/>
         
-        <h1>Enter Password</h1>
+        <h2>Enter Password</h2>
         <input type='password' onChange={(e)=>setPass(e.target.value)}/>
 
-        <button onClick={handleRegister}>
-            Submit
-        </button>
+        <div className=''>
+            <button onClick={handleRegister}>
+                Submit
+            </button>
+        </div>
     </div>
   )
 }

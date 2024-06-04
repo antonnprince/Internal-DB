@@ -11,7 +11,6 @@ const {email} = useParams()
       const fetchDetails =async(email)=>{
         try {
             const response = await axios.get(`http://localhost:5500/get_details/${email}`)
-            console.log(response.data)
             setUserDetails(response.data)
         } catch (error) {
           console.log(error)

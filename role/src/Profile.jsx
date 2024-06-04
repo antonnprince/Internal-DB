@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import {auth} from '../firebase.js'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
+
 const Profile = () => {
 const [userDetails, setUserDetails] = useState({})
-
+const {email} = useParams()
     useEffect(()=>{
+
+      const fetchDetails =async(email)=>{
         try {
-                 auth.onAuthStateChanged(async (user)=>{
-                  const email = user.email
-                  await axios.post("http://localhost:5500/get_details", {email:email}).
-                  then((response)=>{console.log(response.data), setUserDetails(response)}).catch((error)=>console.log(error))
-                 console.log(userDetails)
-             })
+            const response = await axios.get(`http://localhost:5500/get_details/${email}`)
+            console.log(response)
         } catch (error) {
-            console.log(error)
+          console.log(error)
         }
+      }
+
+        auth.onAuthStateChanged((user)=>{
+          if(user)
+            { 
+              const userEmail = user.email
+              fetchDetails(userEmail)
+            }
+        })
        
     },[])
 

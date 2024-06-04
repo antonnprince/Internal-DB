@@ -12,13 +12,11 @@ const Register = () => {
 
     const handleRegister= async(e)=>{
         e.preventDefault()
-        
         try {
          await createUserWithEmailAndPassword(auth,email,pass)
         const user = auth.currentUser
+       
         window.location.href="/profile"
-        
-
             
         } catch (error) {
             console.log(error.message)

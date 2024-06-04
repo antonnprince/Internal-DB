@@ -46,7 +46,7 @@ app.get('/get_details/:email', async (request, response)=>{
     try {
         const {email} = request.params
         const result = await User.find({email:email})
-        return response.status(200).json(result)
+        return response.status(200).send(result)
         }
      catch (error) {
         console.log(error)

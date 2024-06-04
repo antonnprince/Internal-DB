@@ -4,14 +4,15 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const Profile = () => {
-const [userDetails, setUserDetails] = useState({})
+const [userDetails, setUserDetails] = useState([])
 const {email} = useParams()
     useEffect(()=>{
 
       const fetchDetails =async(email)=>{
         try {
             const response = await axios.get(`http://localhost:5500/get_details/${email}`)
-            console.log(response)
+            console.log(response.data)
+            setUserDetails(response.data)
         } catch (error) {
           console.log(error)
         }
@@ -30,7 +31,10 @@ const {email} = useParams()
   return (
     <div>
       Profile
-     {/* <h1>Welcome {userDetails}</h1>  */}
+     <h1>Welcome</h1>
+       {/* { userDetails?
+        (userDetails[0].department):(<h2>Loading...</h2>)
+       }   */}
     </div>
   )
 }

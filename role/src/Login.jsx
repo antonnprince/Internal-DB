@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { auth } from '../firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 const Login = () => {
-
   const [email,setEmail] = useState("")
   const [pass,setPass] = useState("")
 

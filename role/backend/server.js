@@ -8,7 +8,8 @@ app.use(express.json())
 app.use(cors())
 
 const PORT = 5500
-const mongoURL = 'mongodb+srv://prompttest123:antonprince95@cluster0.asiy8fr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const mongoURL = 'mongodb+srv://prompttest123:antonprince95@cluster0.asiy8fr.mongodb.net/try?retryWrites=true&w=majority&appName=Cluster0'
+// const mongoURL = 'mongodb+srv://prompttest123:antonprince95@cluster0.asiy8fr.mongodb.net/<database name>?retryWrites=true&w=majority&appName=Cluster0'
 
 app.get('/',  (req,res)=>{
     return res.status(234).send('Server')

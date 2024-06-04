@@ -1,7 +1,8 @@
 import React from 'react'
-import { auth,db } from '../firebase.js'
+import { useState } from 'react'
+import { auth } from '../firebase.js'
 import { createUserWithEmailAndPassword  } from 'firebase/auth'
-import {doc, setDoc} from "firebase/firestore"
+// import {doc, setDoc} from "firebase/firestore"
 import axios from 'axios'
 
 const Register = () => {
@@ -11,20 +12,12 @@ const Register = () => {
 
     const handleRegister= async(e)=>{
         e.preventDefault()
-        console.log(email,name,pass)
+        
         try {
          await createUserWithEmailAndPassword(auth,email,pass)
         const user = auth.currentUser
-        //console.log(user)
         window.location.href="/profile"
-        if(user)
-            {
-                try {
-                    axios.post('localhost:5500')
-                } catch (error) {
-                    console.log(error)
-                }
-            }
+        
 
             
         } catch (error) {

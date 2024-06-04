@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import {auth} from '../firebase.js'
-import { getDoc, doc } from 'firebase/firestore'
-
+import axios from 'axios'
 const Profile = () => {
-const [userDetails, setUserDetails] = useState()
+const [userDetails, setUserDetails] = useState({})
 
     useEffect(()=>{
         try {
-                auth.onAuthStateChanged(async (user)=>{
-                console.log(user)
-                const docRef=doc(db,"Users",user.uid)
-                const docSnap = await getDoc(docRef)
-                if(docSnap.exists())
-                    {
-                        setUserDetails(docSnap.data())
-                    }
-            })
+                 auth.onAuthStateChanged(async (user)=>{
+                  const email = user.email
+                  await axios.post("http://localhost:5500/get_details", {email:email}).
+                  then((response)=>{console.log(response.data), setUserDetails(response)}).catch((error)=>console.log(error))
+                 console.log(userDetails)
+             })
         } catch (error) {
-            
+            console.log(error)
         }
        
     },[])
 
   return (
-    <div>Profile</div>
+    <div>
+      Profile
+     {/* <h1>Welcome {userDetails}</h1>  */}
+    </div>
   )
 }
 

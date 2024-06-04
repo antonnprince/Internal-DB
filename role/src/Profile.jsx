@@ -28,13 +28,34 @@ const {email} = useParams()
        
     },[])
 
+    const handleLogout= async()=>{
+      try {
+          await auth.signOut()
+          console.log("User Signed out")
+          window.location.href="/login"
+           
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
   return (
     <div>
-      Profile
-     <h1>Welcome</h1>
-       {/* { userDetails?
-        (userDetails[0].department):(<h2>Loading...</h2>)
-       }   */}
+      
+    
+       {
+          userDetails.map((details)=>(
+            <div key={details._id}>
+            Currently logged in as {details.email}
+            <h2>Welcome to</h2  >
+            <h1>{details.department}</h1>
+            </div>
+          ))
+        }
+
+       <button className='bg-blue' onClick={handleLogout}>
+        Logout
+       </button>
     </div>
   )
 }

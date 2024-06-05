@@ -11,7 +11,7 @@ const Register = () => {
     const [name,setName]=useState("")
     const [userDetails, setUserDetails] = useState("")
  
-    const validate=async (email)=>{
+    const validate=async(email)=>{
     const res = await axios.get(`http://localhost:5500/get_details/${email}`)
     return res
   }
@@ -21,16 +21,16 @@ const Register = () => {
         e.preventDefault()
         try {
             const result = await validate(email)
-            setUserDetails(result.data)
-            if(!setUserDetails(email))
+            setUserDetails(result.data) 
+            if(!setUserDetails(email)) 
               {
                 console.log("You are not authorized to access this webpage")
                 window.location.href="/login"
               }
               else{
-            await createUserWithEmailAndPassword(auth,email,pass)
-            const user = auth.currentUser
-             window.location.href="/profile"
+              await createUserWithEmailAndPassword(auth,email,pass)
+              const user = auth.currentUser
+              window.location.href="/profile"
               }
         } catch (error) {
             console.log(error.message)

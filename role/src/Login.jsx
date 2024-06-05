@@ -10,7 +10,7 @@ const Login = () => {
   const [email,setEmail] = useState("")
   const [pass,setPass] = useState("")
 
-  const handleLogin= async(e)=>{
+  const handleLogin=async(e)=>{
     e.preventDefault()
     try {
           await signInWithEmailAndPassword(auth,email,pass)

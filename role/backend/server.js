@@ -47,6 +47,22 @@ app.post('/create_user', async (request, response) => {
     }
 });
 
+const adminCheck=(permissions)=>{
+    return (req,res,next)=>{
+        const role = req.body.role
+        if(permissions.includes(role))
+            next()
+        else{
+            return res.status(203).json({message:"You dont have admin privileges"})
+        }
+    }
+}
+
+// app.get('/admin_check', adminCheck(['admin']), async(req,res)=>{
+//     return res.status(200).json({message:""})
+// })
+
+
 app.get('/get_details/:email', async (request, response)=>{
     try {
         const {email} = request.params

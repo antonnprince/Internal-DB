@@ -10,13 +10,14 @@ const Register = () => {
     const [pass,setPass] = useState("")
     const [name,setName]=useState("")
     const [userDetails, setUserDetails] = useState("")
-  const validate=async (email)=>{
+ 
+    const validate=async (email)=>{
     const res = await axios.get(`http://localhost:5500/get_details/${email}`)
     return res
   }
 
 
-    const handleRegister= async(e)=>{
+    const handleRegister=async(e)=>{
         e.preventDefault()
         try {
             const result = await validate(email)
@@ -29,7 +30,7 @@ const Register = () => {
               else{
             await createUserWithEmailAndPassword(auth,email,pass)
             const user = auth.currentUser
-            // window.location.href="/profile"
+             window.location.href="/profile"
               }
         } catch (error) {
             console.log(error.message)

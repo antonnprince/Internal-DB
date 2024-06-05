@@ -5,7 +5,7 @@ import axios from 'axios'
 const Admin = () => {
     const [email, setEmail] = useState("")
     const [dep, setDep] = useState("")
-    const [role, setRole]=useState("")
+    //const [role, setRole]=useState("")
 
     const addUser =async(e)=>{
       

@@ -32,9 +32,14 @@ app.post('/create_user', async (request, response) => {
             department: request.body.department,
         };
 
-        const user = await User.create(newUser);
-
-        return response.status(201).send({ message: "User created successfully", user });
+        const res = await User.find({email: newUser.email})
+        if(res.some(user=> user.email===newUser.email))
+            return response.status(200).send({message:"User already exists, please re-check the email ID"})   
+        else
+        {
+            const user = await User.create(newUser);
+            return response.status(201).send({ message: "User created successfully", user });
+        }
 
     } catch (error) {
         console.log(error);

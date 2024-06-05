@@ -1,8 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { auth } from '../firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
+
+
+
 const Login = () => {
   const [email,setEmail] = useState("")
   const [pass,setPass] = useState("")
@@ -10,14 +13,15 @@ const Login = () => {
   const handleLogin= async(e)=>{
     e.preventDefault()
     try {
-      
-      await signInWithEmailAndPassword(auth,email,pass)
-      window.location.href="/profile"
-
+          await signInWithEmailAndPassword(auth,email,pass)
+          window.location.href="/profile"
     } catch (error) {
       console.log(error)
     }
   }
+
+
+
   return (
     <div>
         <h2>Enter email</h2>

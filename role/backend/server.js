@@ -2,15 +2,18 @@ import express, { response } from 'express'
 import cors from 'cors'
 import mongoose, { mongo } from 'mongoose'
 import { User } from './models/UserModel.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app=express()
 app.use(express.json())
 app.use(cors())
 
 const PORT = 5500
-const mongoURL = 'mongodb+srv://prompttest123:antonprince95@cluster0.asiy8fr.mongodb.net/employees?retryWrites=true&w=majority&appName=Cluster0'
-// const mongoURL = 'mongodb+srv://prompttest123:antonprince95@cluster0.asiy8fr.mongodb.net/<database name>?retryWrites=true&w=majority&appName=Cluster0'
 
+// const mongoURL = 'mongodb+srv://<cluster_name>:<password>@cluster0.asiy8fr.mongodb.net/<database_name>?retryWrites=true&w=majority&appName=Cluster0'
+const mongoURL=process.env.MONGO_URL
 app.get('/',  (req,res)=>{
     return res.status(234).send('Server')
 })

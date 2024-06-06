@@ -7,7 +7,7 @@ const Admin = () => {
     const [dep, setDep] = useState("")
     const [role, setRole]=useState("")
 
-    const addUser =async(e)=>{
+    const addUser = async (e) =>{
       
       e.preventDefault()
         
@@ -43,7 +43,7 @@ const Admin = () => {
 
         <div className='mt-12'>
             <button className='p-4 mt-12' onClick={addUser}>
-              Submit to Add Details
+                Submit to Add Details
             </button>
         </div>
 

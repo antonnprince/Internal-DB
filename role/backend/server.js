@@ -3,8 +3,29 @@ import cors from 'cors'
 import mongoose, { mongo } from 'mongoose'
 import { User } from './models/UserModel.js'
 import dotenv from 'dotenv'
+import jwt from 'jsonwebtoken'
+
 
 dotenv.config()
+
+const feed=[
+    {
+        role:"Team Head",
+        department:"Marketing",
+        task:"Task 1256"
+    },
+
+    {
+        role:"Junior Manager",
+        department:"Sales",
+        task:"Task 123"
+    },
+    {
+        role:"Team Lead",
+        department:"Tech",
+        task:"Task 123353"
+    },
+]
 
 const app=express()
 app.use(express.json())
@@ -63,3 +84,9 @@ app.get('/get_details/:email', async (request, response)=>{
         console.log(error)
     }
 })
+
+function authenticateUser(requiredRoles){
+    return (req,res,next)=>{
+
+    }
+}

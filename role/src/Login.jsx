@@ -17,6 +17,9 @@ const Login = () => {
           window.location.href="/profile"
     } catch (error) {
       console.log(error)
+      alert("Register first before logging in")
+      setEmail("")
+      setPass("")
     }
   }
 
@@ -25,10 +28,10 @@ const Login = () => {
   return (
     <div>
         <h2>Enter email</h2>
-        <input type='email' onChange={(e)=>setEmail(e.target.value)}/>
+        <input type='email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
 
         <h2>Enter Password</h2>
-        <input type='password' onChange={(e)=>setPass(e.target.value)}/>
+        <input type='password' value={pass} onChange={(e)=>setPass(e.target.value)}/>
 
       <div className=''>
               <button onClick={handleLogin} className='m-4'>

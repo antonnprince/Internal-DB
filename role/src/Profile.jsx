@@ -45,9 +45,12 @@ const {email} = useParams()
        {
           userDetails.map((details)=>(
             <div key={details._id}>
-            Currently logged in as {details.email}
-            <h2>Welcome to</h2  >
-            <h1>{details.department}</h1>
+              Currently logged in as {details.email}
+                <h2>Welcome to</h2  >
+                
+                <h1>{details.department}</h1>
+                
+                <h2>Role:{details.role}</h2>
             </div>
           ))
         }

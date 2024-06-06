@@ -7,17 +7,14 @@ const Profile = () => {
 const [userDetails, setUserDetails] = useState([])
 const {email} = useParams()
     useEffect(()=>{
-
       const fetchDetails =async(email)=>{
         try {
-            
             const response = await axios.get(`http://localhost:5500/get_details/${email}`)
             setUserDetails(response.data)
         } catch (error) {
           console.log(error)
         }
       }
-
         auth.onAuthStateChanged((user)=>{
           if(user)
             { 

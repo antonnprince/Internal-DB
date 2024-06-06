@@ -19,20 +19,24 @@ const Register = () => {
         e.preventDefault()
         try {
             const result = await validate(email)
-            const fetchEmail = result.data[0].email
-            if(fetchEmail && fetchEmail===email) 
-              {
-                await createUserWithEmailAndPassword(auth,email,pass)
-                const user = auth.currentUser
-                const tkn = await axios.post(`http://localhost:5500/get_token`,{email:email})
-                if(tkn) 
-                console.log(tkn)
-                // window.location.href="/profile"
-                
-              }
-              else{
-                alert("You are not authorized to access this webpage")
-              }
+            if(result)
+            {
+              const fetchEmail = result.data[0].email
+              if(fetchEmail===email) 
+                {
+                  await createUserWithEmailAndPassword(auth,email,pass)
+                  const user = auth.currentUser
+                  const tkn = await axios.post("http://localhost:5500/get_token",{email:email})
+                  if(tkn) 
+                  console.log(tkn)
+                  // window.location.href="/profile"
+                  
+                }
+                else{
+                  alert("You are not authorized to access this webpage")
+                }
+            }
+            
         } catch (error) {
             console.log(error.message)
         }

@@ -3,8 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { auth } from '../firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-
-
+import axios from 'axios'
 
 const Login = () => {
   const [email,setEmail] = useState("")
@@ -14,7 +13,10 @@ const Login = () => {
     e.preventDefault()
     try {
           await signInWithEmailAndPassword(auth,email,pass)
-          window.location.href="/profile"
+          const tkn = await axios.post("http://localhost:5500/get_token",{email:email})
+          if(tkn)
+            console.log(tkn)
+           window.location.href="/profile"
     } catch (error) {
       console.log(error)
       alert("Register first before logging in")

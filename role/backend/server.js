@@ -4,29 +4,9 @@ import mongoose, { mongo } from 'mongoose'
 import { User } from './models/UserModel.js'
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
-
+import { Task } from './models/taskModel.js'
 
 dotenv.config()
-
-const feed=[
-    {
-        role:"Team Head",
-        department:"Marketing",
-        task:"Task 1256"
-    },
-
-    {
-        role:"Junior Manager",
-        department:"Sales",
-        task:"Task 123"
-    },
-    {
-        role:"Team Lead",
-        department:"Tech",
-        task:"Task 123353"
-    },
-]
-
 const app=express()
 app.use(express.json())
 app.use(cors())
@@ -63,8 +43,9 @@ app.post('/create_user', async (request, response) => {
             return response.status(200).send({message:"User already exists, please re-check the email ID"})   
         else
         {
-            const user = await User.create(newUser);
-            return response.status(201).send({ message: "User created successfully", user });
+            await User.create(newUser);
+            // const accessToken = jwt.sign(newUser, process.env.ACCESS_TOKEN)
+            return response.status(201).send({ message: "User created successfully", accessToken });
         }
 
     } catch (error) {
@@ -85,8 +66,6 @@ app.get('/get_details/:email', async (request, response)=>{
     }
 })
 
-function authenticateUser(requiredRoles){
-    return (req,res,next)=>{
-
-    }
-}
+app.post('/set_task', async(req,res)=>{
+    
+})

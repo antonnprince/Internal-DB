@@ -19,9 +19,7 @@ const Register = () => {
         e.preventDefault()
         try {
             const result = await validate(email)
-             console.log("fetched email:",result.data[0].email)
-             console.log("entered email:", email)
-             const fetchEmail = result.data[0].email
+            const fetchEmail = result.data[0].email
             if(fetchEmail && fetchEmail===email) 
               {
                 await createUserWithEmailAndPassword(auth,email,pass)

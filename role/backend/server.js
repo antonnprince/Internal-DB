@@ -37,11 +37,9 @@ app.post('/create_user', async (request, response) => {
             department: request.body.department,
             role:request.body.role
         };
-
-        
             await User.create(newUser);
-            const accessToken = jwt.sign(newUser, process.env.ACCESS_TOKEN)
-            return response.status(201).send({ message: "User created successfully", accessToken });
+           
+            return response.status(201).send({ message: "User created successfully"});
         
 
     } catch (error) {
@@ -50,6 +48,24 @@ app.post('/create_user', async (request, response) => {
     }
 });
 
+app.post('/get_token', async (req,res)=>{
+
+    const {email} = req.body
+    const details = await User.find({email:email})
+    
+     const department = details[0].department
+     const role = details[0].role
+    
+       const user =  {
+           email: email,
+           department: department,
+           role:role
+       }
+
+       const accessToken = jwt.sign(user, 'secret12345')
+
+    return res.status(200).json(accessToken)
+})
 
 app.get('/get_details/:email', async (request, response)=>{
     try {
@@ -62,6 +78,6 @@ app.get('/get_details/:email', async (request, response)=>{
     }
 })
 
-app.post('/set_task', async(req,res)=>{
+// app.post('/set_task', async(req,res)=>{
     
-})
+// })

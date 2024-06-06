@@ -24,8 +24,9 @@ const Register = () => {
               {
                 await createUserWithEmailAndPassword(auth,email,pass)
                 const user = auth.currentUser
+                const tkn = await axios.post(`http://localhost:5500/get_token`,{email:email})
                 window.location.href="/profile"
-                //  window.location.href="/login"
+                
               }
               else{
                 alert("You are not authorized to access this webpage")

@@ -13,7 +13,7 @@ const taskSchema = mongoose.Schema({
     },
 
     from:{
-        type:Stirng,
+        type:String,
         required:true
     }
 })

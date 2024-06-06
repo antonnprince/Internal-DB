@@ -38,15 +38,11 @@ app.post('/create_user', async (request, response) => {
             role:request.body.role
         };
 
-        const res = await User.find({email: newUser.email})
-        if(res.some(user=> user.email===newUser.email))
-            return response.status(200).send({message:"User already exists, please re-check the email ID"})   
-        else
-        {
+        
             await User.create(newUser);
-            // const accessToken = jwt.sign(newUser, process.env.ACCESS_TOKEN)
+            const accessToken = jwt.sign(newUser, process.env.ACCESS_TOKEN)
             return response.status(201).send({ message: "User created successfully", accessToken });
-        }
+        
 
     } catch (error) {
         console.log(error);

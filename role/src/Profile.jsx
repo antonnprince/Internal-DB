@@ -11,8 +11,8 @@ const {email} = useParams()
 useEffect(()=>{
   auth.onAuthStateChanged((user)=>{
     if(!user)
-      { 
-        window.location.href="/login"
+      {  
+        window.location.replace('http://localhost:5173/login');
       }
       else{
         const userEmail = user.email
@@ -20,6 +20,7 @@ useEffect(()=>{
       }
   })
  
+  window.addEventListener('beforeunload', handleLogout)
 },[])
 
 const fetchDetails =async(email)=>{
@@ -35,9 +36,7 @@ const fetchDetails =async(email)=>{
     const handleLogout= async()=>{
       try {
           await auth.signOut()
-          console.log("User Signed out")
           window.location.href="/login"
-           
       } catch (error) {
         console.log(error)
       }

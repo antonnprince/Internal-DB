@@ -8,7 +8,6 @@ import axios from 'axios'
 const Register = () => {
     const [email,setEmail] = useState("")
     const [pass,setPass] = useState("")
-    const [userDetails, setUserDetails] = useState("")
  
     const validate=async(email)=>{
     const res = await axios.get(`http://localhost:5500/get_details/${email}`)
@@ -22,8 +21,8 @@ const Register = () => {
             const result = await validate(email)
              console.log("fetched email:",result.data[0].email)
              console.log("entered email:", email)
-             setUserDetails(result.data[0].email) 
-            if(userDetails==email) 
+             const fetchEmail = result.data[0].email
+            if(fetchEmail && fetchEmail===email) 
               {
                 await createUserWithEmailAndPassword(auth,email,pass)
                 const user = auth.currentUser

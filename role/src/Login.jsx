@@ -25,8 +25,6 @@ const Login = () => {
     }
   }
 
-
-
   return (
     <div>
         <h2>Enter email</h2>

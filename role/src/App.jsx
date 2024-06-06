@@ -4,7 +4,7 @@ import Register from './Register'
 import Profile from './Profile'
 import Admin from './Admin'
 import './App.css'
-
+import {auth} from '../firebase'
 
 function App() {
   return(
@@ -15,7 +15,6 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path='/profile' element={<Profile/>}/>
-
         <Route path='/admin' element={<Admin/>}/> 
       
       </Routes>

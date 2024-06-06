@@ -28,11 +28,13 @@ app.listen(PORT, ()=>{
     console.log(error)
 })
 
+
 app.post('/create_user', async (request, response) => {
     try {
         const newUser = {
             email: request.body.email,
             department: request.body.department,
+            role:request.body.role
         };
 
         const res = await User.find({email: newUser.email})
@@ -46,7 +48,7 @@ app.post('/create_user', async (request, response) => {
 
     } catch (error) {
         console.log(error);
-        return response.status(500).send({ error: "An error occurred while creating the user" });
+        return response.status(500).send({ message: "An error occurred while creating the user" });
     }
 });
 

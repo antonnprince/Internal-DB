@@ -5,7 +5,7 @@ import axios from 'axios'
 const Admin = () => {
     const [email, setEmail] = useState("")
     const [dep, setDep] = useState("")
-    //const [role, setRole]=useState("")
+    const [role, setRole]=useState("")
 
     const addUser =async(e)=>{
       
@@ -13,7 +13,8 @@ const Admin = () => {
         
       const user = {
           email: email,
-          department: dep
+          department: dep,
+          role:role
         }
 
         try {
@@ -21,8 +22,10 @@ const Admin = () => {
           alert(res.data.message)
           setEmail("")
           setDep("")
+          setRole("")
         } catch (error) {
-          console.log(error)
+          alert(error)
+          // console.log(error)
         }
     }
   return (
@@ -34,7 +37,10 @@ const Admin = () => {
         
         <h2>Enter department of employee</h2>
         <input className='px-4 py-1 w-1/4' onChange={(e)=>setDep(e.target.value)} value={dep}/>
-    
+
+        <h2>Enter role of employee</h2>
+        <input className='px-4 py-1 w-1/4' onChange={(e)=>setRole(e.target.value)} value={role}/>
+
         <div className='mt-12'>
             <button className='p-4 mt-12' onClick={addUser}>
               Submit to Add Details

@@ -35,15 +35,12 @@ const Admin = () => {
   },[])
 
     const addUser = async (e) =>{
-      
-      e.preventDefault()
-        
+      e.preventDefault()   
       const user = {
           email: email,
           department: dep,
           role:role
         }
-
         try {
           const res = await axios.post("http://localhost:5500/create_user", user)
           alert(res.data.message)
@@ -54,6 +51,15 @@ const Admin = () => {
           alert(error)
           // console.log(error)
         }
+    }
+
+    const handleLogout= async()=>{
+      try {
+          await auth.signOut()
+          window.location.href="/login"
+      } catch (error) {
+        console.log(error)
+      }
     }
   return (
     <div>
@@ -75,6 +81,10 @@ const Admin = () => {
         <div className='mt-12'>
             <button className='p-4 mt-12' onClick={addUser}>
                 Submit to Add Details
+            </button>
+
+            <button className='p-4' onClick={handleLogout}>
+              Logout
             </button>
         </div>
         </>):(

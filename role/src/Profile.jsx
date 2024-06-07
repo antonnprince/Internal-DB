@@ -29,7 +29,6 @@ useEffect(()=>{
            if(token)
             { 
               const user = jwtDecode(token)
-              // console.log(user)
               const userEmail = user.email
               fetchDetails(userEmail) 
             }

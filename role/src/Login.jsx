@@ -13,9 +13,8 @@ const Login = () => {
     e.preventDefault()
     try {
           await signInWithEmailAndPassword(auth,email,pass)
-          const tkn = await axios.post("http://localhost:5500/get_token",{email:email})
-          if(tkn)
-            console.log(tkn)
+          const token = await axios.post("http://localhost:5500/get_token",{email:email})
+          localStorage.setItem('token',token.data)
            window.location.href="/profile"
     } catch (error) {
       console.log(error)

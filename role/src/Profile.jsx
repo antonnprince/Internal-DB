@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {auth} from '../firebase.js'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode' 
 
 const Profile = () => {
 const [userDetails, setUserDetails] = useState([])
@@ -15,6 +16,12 @@ useEffect(()=>{
         window.location.replace('http://localhost:5173/login');
       }
       else{
+         const token = localStorage.getItem('token')
+           if(token)
+            { 
+              const user = jwtDecode(token)
+              console.log(user)
+            }
         const userEmail = user.email
         fetchDetails(userEmail)
       }

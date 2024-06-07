@@ -52,7 +52,6 @@ app.post('/get_token', async (req,res)=>{
 
     const {email} = req.body
     const details = await User.find({email:email})
-    
      const department = details[0].department
      const role = details[0].role
     

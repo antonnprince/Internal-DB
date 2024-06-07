@@ -20,7 +20,7 @@ function App() {
   return(
     <Router>
       <Routes>
-        <Route path="/" index element={<Login/>}/>
+        <Route path="/" index element={user? <Navigate to="/profile"/> : <Login/>}/>
 
         <Route path="/login" element={ <Login/>} />
 

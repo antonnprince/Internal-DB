@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {auth} from '../firebase.js'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode' 
 
 const Profile = () => {
 const [userDetails, setUserDetails] = useState([])
 const {email} = useParams()
-
+const navigate = useNavigate()
 
 const fetchDetails =async(email)=>{
   try {
@@ -22,7 +22,7 @@ useEffect(()=>{
   auth.onAuthStateChanged((user)=>{
     if(!user)
       {  
-        window.location.replace('http://localhost:5173/login');
+        navigate('/login');
       }
       else{
           const token = localStorage.getItem('token')
@@ -36,10 +36,11 @@ useEffect(()=>{
       }
   })
   window.addEventListener('beforeunload', handleLogout)
-},[])
+   return () => window.removeEventListener('beforeunload', handleLogout);
+},[navigate])
 
 
-
+  
     const handleLogout= async()=>{
       try {
           await auth.signOut()
@@ -65,7 +66,7 @@ useEffect(()=>{
           </div>
         ))
       ) : (
-        <h1>No user details available</h1>
+        <h1 className='text-3xl font-bold'>No user available, login to continue</h1>
       )
     }
   </div>

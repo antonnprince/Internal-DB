@@ -77,6 +77,21 @@ app.get('/get_details/:email', async (request, response)=>{
     }
 })
 
-// app.post('/set_task', async(req,res)=>{
+app.post('/set_task', async(req,res)=>{
     
-// })
+    const task = {
+        data: req.body.data,
+        department:req.body.department,
+        sender:req.body.sender,
+        receiver:req.body.receiver
+    }    
+    await Task.create(task)
+    res.status(200).json({message:"Task updated successfully"})
+})
+
+app.post('get_task', async (req,res)=>{
+    const user = {
+        department:req.body.department,
+        role:req.boody.role
+    }
+})

@@ -9,27 +9,6 @@ const [userDetails, setUserDetails] = useState([])
 const {email} = useParams()
 
 
-useEffect(()=>{
-  auth.onAuthStateChanged((user)=>{
-    if(!user)
-      {  
-        window.location.replace('http://localhost:5173/login');
-      }
-      else{
-         const token = localStorage.getItem('token')
-           if(token)
-            { 
-              const user = jwtDecode(token)
-              console.log(user)
-            }
-        const userEmail = user.email
-        fetchDetails(userEmail)
-      }
-  })
- 
-  window.addEventListener('beforeunload', handleLogout)
-},[])
-
 const fetchDetails =async(email)=>{
   try {
       const response = await axios.get(`http://localhost:5500/get_details/${email}`)
@@ -38,6 +17,27 @@ const fetchDetails =async(email)=>{
     console.log(error)
   }
 }
+
+useEffect(()=>{
+  auth.onAuthStateChanged((user)=>{
+    if(!user)
+      {  
+        window.location.replace('http://localhost:5173/login');
+      }
+      else{
+          const token = localStorage.getItem('token')
+           if(token)
+            { 
+              const user = jwtDecode(token)
+              console.log(user)
+              const userEmail = user.email
+              fetchDetails(userEmail) 
+            }
+      }
+  })
+  window.addEventListener('beforeunload', handleLogout)
+},[])
+
 
 
     const handleLogout= async()=>{

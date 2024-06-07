@@ -1,11 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { auth } from '../firebase'
+import { useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode'
 
 
 const Admin = () => {
     const [email, setEmail] = useState("")
     const [dep, setDep] = useState("")
     const [role, setRole]=useState("")
+    const[admin, setAdmin]=useState(false)
+    const navigate = useNavigate()
+  
+  useEffect(()=>{
+    auth.onAuthStateChanged((user)=>{
+      if(user)
+        {
+            const token = localStorage.getItem('token')
+            const decodedToken = jwtDecode(token)
+            if(decodedToken.role==='admin' && decodedToken.department==='admin')
+              setAdmin(true)
+            else
+             {
+              setAdmin(false)
+              navigate('/login')
+             }
+              
+        }
+        else
+        {
+            navigate('/login')
+        }
+    })
+  },[])
 
     const addUser = async (e) =>{
       
@@ -30,6 +57,10 @@ const Admin = () => {
     }
   return (
     <div>
+      
+      
+      { admin?(
+        <>
         <h1>Welcome Admin</h1>
         
         <h2>Enter email of employee</h2>
@@ -46,6 +77,15 @@ const Admin = () => {
                 Submit to Add Details
             </button>
         </div>
+        </>):(
+          
+            <h1>No access, go back!</h1>
+          
+        )
+      }
+       
+      
+        
 
     </div>
   )

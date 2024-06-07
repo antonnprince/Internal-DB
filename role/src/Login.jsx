@@ -18,7 +18,6 @@ const Login = () => {
       const tokenResponse = await axios.post("http://localhost:5500/get_token", { email: email })
       const token = tokenResponse.data
       localStorage.setItem('token', token)
-
       const details = jwtDecode(token)
       if (details.role && details.department === "admin") {
         navigate('/admin')

@@ -12,19 +12,25 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     const auth = getAuth()
+    
     try {
-      await setPersistence(auth, browserSessionPersistence)
-      await signInWithEmailAndPassword(auth, email, pass)
-      const tokenResponse = await axios.post("http://localhost:5500/get_token", { email: email })
-      const token = tokenResponse.data
-      localStorage.setItem('token', token)
-      const details = jwtDecode(token)
-      if (details.role && details.department === "admin") {
-        navigate('/admin')
-      } else {
-        navigate("/profile")
-      }
-    } catch (error) {
+        
+        await setPersistence(auth, browserSessionPersistence)
+        await signInWithEmailAndPassword(auth, email, pass)
+        const tokenResponse = await axios.post("http://localhost:5500/get_token", { email: email })
+        const token = tokenResponse.data
+        localStorage.setItem('token', token)
+        const details = jwtDecode(token)
+        
+        if (details.role && details.department === "admin") {
+          navigate('/admin')
+        } 
+
+        else {
+          navigate("/profile")
+        }
+      } 
+    catch (error) {
       console.log(error)
       alert("Register first before logging in")
       setEmail("")

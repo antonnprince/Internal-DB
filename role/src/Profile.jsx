@@ -5,6 +5,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode' 
 
 const Profile = () => {
+// axios.defaults.withCredentials = true;
 const [userDetails, setUserDetails] = useState([])
 const {email} = useParams()
 const navigate = useNavigate()
@@ -35,7 +36,6 @@ useEffect(()=>{
       }
   })
   window.addEventListener('beforeunload', handleLogout)
-   
 },[navigate])
 
 

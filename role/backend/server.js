@@ -5,12 +5,14 @@ import { User } from './models/UserModel.js'
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 import { Task } from './models/taskModel.js'
-
+// import cookieParser from 'cookie-parser'
 
 dotenv.config()
 const app=express()
 app.use(express.json())
 app.use(cors())
+// app.use(cookieParser());
+
 
 const PORT = 5500
 
@@ -41,8 +43,6 @@ app.post('/create_user', async (request, response) => {
             await User.create(newUser);
            
             return response.status(201).send({ message: "User created successfully"});
-        
-
     } catch (error) {
         console.log(error);
         return response.status(500).send({ message: "An error occurred while creating the user" });
@@ -50,7 +50,6 @@ app.post('/create_user', async (request, response) => {
 });
 
 app.post('/get_token', async (req,res)=>{
-
     const {email} = req.body
     const details = await User.find({email:email})
      const department = details[0].department
@@ -62,9 +61,8 @@ app.post('/get_token', async (req,res)=>{
            role:role
        }
 
-       const accessToken = jwt.sign(user, 'secret12345')
-
-    return res.status(200).json(accessToken)
+        const accessToken = jwt.sign(user, 'secret12345')
+        return res.status(200).json(accessToken)
 })
 
 app.get('/get_details/:email', async (request, response)=>{

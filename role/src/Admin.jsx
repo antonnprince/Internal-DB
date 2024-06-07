@@ -11,8 +11,17 @@ const Admin = () => {
     const [role, setRole]=useState("")
     const[admin, setAdmin]=useState(false)
     const navigate = useNavigate()
+    
+    const handleLogout= async()=>{
+      try {
+          await auth.signOut()
+          navigate("/login")
+      } catch (error) {
+        console.log(error)
+      }
+    }
   
-  useEffect(()=>{
+    useEffect(()=>{
     auth.onAuthStateChanged((user)=>{
       if(user)
         {
@@ -32,6 +41,8 @@ const Admin = () => {
             navigate('/login')
         }
     })
+    window.addEventListener('beforeunload', handleLogout)
+    // return () => window.removeEventListener('beforeunload', handleLogout);
   },[])
 
     const addUser = async (e) =>{
@@ -53,14 +64,7 @@ const Admin = () => {
         }
     }
 
-    const handleLogout= async()=>{
-      try {
-          await auth.signOut()
-          window.location.href="/login"
-      } catch (error) {
-        console.log(error)
-      }
-    }
+  
   return (
     <div>
       

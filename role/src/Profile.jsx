@@ -35,7 +35,7 @@ useEffect(()=>{
       }
   })
   window.addEventListener('beforeunload', handleLogout)
-   return () => window.removeEventListener('beforeunload', handleLogout);
+   
 },[navigate])
 
 

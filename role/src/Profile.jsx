@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode' 
 
+
 const Profile = () => {
 // axios.defaults.withCredentials = true;
 const [userDetails, setUserDetails] = useState([])
@@ -27,6 +28,7 @@ useEffect(()=>{
       }
       else{
           const token = localStorage.getItem('token')
+          localStorage.removeItem('token')
            if(token)
             { 
               const user = jwtDecode(token)

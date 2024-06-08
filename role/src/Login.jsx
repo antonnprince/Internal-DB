@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from 'firebase/auth'
 import axios from 'axios'
-import {jwtDecode} from 'jwt-decode' // Note: Remove the curly braces
+import {jwtDecode} from 'jwt-decode'
+// import Cookies from 'js-cookie';
+
+
+// Note: Remove the curly braces
 axios.defaults.withCredentials = true;
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -22,7 +26,8 @@ const Login = () => {
         const token = tokenResponse.data
         localStorage.setItem('token', token)
         const details = jwtDecode(token)
-        
+        // const tokenn = Cookies.get('jwt');
+        // console.log(tokenn)
         if (details.role && details.department === "admin") {
           navigate('/admin')
         } 

@@ -119,7 +119,6 @@ return (req,res,next)=>{
                 else
                 {
                     return res.redirect('/sales_jm')
-                    // return res.status(403).json({message:"No authorization"})
                 }
             }
         })

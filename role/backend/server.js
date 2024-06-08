@@ -92,6 +92,36 @@ app.get('/get_details/:email', async (request, response)=>{
     }
 })
 
+// SALES MANAGER API
+app.get('/sales',authenticateUser('Senior Manager'), (req,res)=>{
+    return res.status(200).json({message:"You have reached senior manager dashboard"})
+})
+
+// SALES MANAGER AUTH
+function authenticateUser(requiredRole){
+return (req,res,next)=>{
+    const value = req.cookies.jwt
+    jwt.verify(value, 'secret12345', (err,user)=>{
+        if(err) return res.status(403).json(err)
+        if(user)
+            {
+                if(user.role===requiredRole)
+                    {
+                        req.user = user
+                        next()
+                    }
+                else
+                {
+                    return res.status(403).json({message:"No authorization"})
+                }
+            }
+    })
+}
+  
+}
+
+
+
 app.post('/set_task', async(req,res)=>{
     
     const task = {

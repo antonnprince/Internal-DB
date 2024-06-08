@@ -26,12 +26,10 @@ const Login = () => {
         const token = tokenResponse.data
         localStorage.setItem('token', token)
         const details = jwtDecode(token)
-        // const tokenn = Cookies.get('jwt');
-        // console.log(tokenn)
+
         if (details.role && details.department === "admin") {
           navigate('/admin')
-        } 
-
+        }
         else {
           navigate("/profile")
         }

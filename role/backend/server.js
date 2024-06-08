@@ -97,6 +97,12 @@ app.get('/sales',authenticateUser('Senior Manager'), (req,res)=>{
     return res.status(200).json({message:"You have reached senior manager dashboard"})
 })
 
+// JUNIOR MANAGER API
+app.get('/sales_jm',(req,res)=>{
+    const {email}=req.body
+    return res.status(200).json({message:`Hello Junior Manager, ${email}`})
+})
+
 // SALES MANAGER AUTH
 function authenticateUser(requiredRole){
 return (req,res,next)=>{
@@ -112,13 +118,13 @@ return (req,res,next)=>{
                     }
                 else
                 {
-                    return res.status(403).json({message:"No authorization"})
+                    return res.redirect('/sales_jm')
+                    // return res.status(403).json({message:"No authorization"})
                 }
             }
-    })
-}
-  
-}
+        })
+    }
+  }
 
 
 

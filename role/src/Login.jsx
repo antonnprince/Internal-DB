@@ -3,11 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from 'firebase/auth'
 import axios from 'axios'
 import {jwtDecode} from 'jwt-decode' // Note: Remove the curly braces
-
+axios.defaults.withCredentials = true;
 const Login = () => {
   const [email, setEmail] = useState("")
   const [pass, setPass] = useState("")
   const navigate = useNavigate()
+
 
   const handleLogin = async (e) => {
     e.preventDefault()

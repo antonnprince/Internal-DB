@@ -109,18 +109,21 @@ return (req,res,next)=>{
     const value = req.cookies.jwt
     jwt.verify(value, 'secret12345', (err,user)=>{
         if(err) return res.status(403).json(err)
-        if(user)
-            {
-                if(user.role===requiredRole)
-                    {
-                        req.user = user
-                        next()
-                    }
-                else
+        else
+        {
+            if(user)
                 {
-                    return res.redirect('/sales_jm')
+                    if(user.role===requiredRole)
+                        {
+                            req.user = user
+                            next()
+                        }
+                    else
+                    {
+                        return res.redirect('/sales_jm')
+                    }
                 }
-            }
+        }   
         })
     }
   }

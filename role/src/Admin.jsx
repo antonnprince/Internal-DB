@@ -26,6 +26,7 @@ const Admin = () => {
       if(user)
         {
             const token = localStorage.getItem('token')
+            localStorage.removeItem('token')
             const decodedToken = jwtDecode(token)
             if(decodedToken.role==='admin' && decodedToken.department==='admin')
               setAdmin(true)

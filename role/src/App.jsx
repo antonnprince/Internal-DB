@@ -6,6 +6,8 @@ import Admin from './Admin'
 import './App.css'
 import {auth} from '../firebase'
 import { useState,useEffect } from 'react'
+import Sales from './Sales'
+import { SalesJM } from './SalesJM'
 
 function App() {
   const [user,setUser]=useState()
@@ -29,6 +31,10 @@ function App() {
         <Route path='/profile' element={<Profile/> }/>
         
         <Route path='/admin' element={<Admin/>}/> 
+
+        <Route path='/sales' element={<Sales/>}/>
+
+        <Route path='/sales_jm' element={<SalesJM/>}/>
       
       </Routes>
     </Router>

@@ -26,12 +26,16 @@ const Login = () => {
         const token = tokenResponse.data
         localStorage.setItem('token', token)
         const details = jwtDecode(token)
-
+        console.log(details)
         if (details.role && details.department === "admin") {
-          navigate('/admin')
+          // navigate('/admin')
+        }
+        else if(details.department==="Sales"){
+          console.log("called sales")
+         axios.get('http://localhost:5500/sales', { withCredentials: true })
         }
         else {
-          navigate("/profile")
+          // navigate("/profile")
         }
       } 
     catch (error) {

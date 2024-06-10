@@ -12,9 +12,10 @@ const app=express()
 app.use(express.json())
 
 app.use(cors({
-    origin:'http://localhost:5173',
-    credentials:true
-}))
+    origin: ['http://localhost:5173','http://localhost:5500'], // Specify your frontend URL
+    credentials: true // Allow credentials (cookies, authorization headers, etc.)
+  }));
+
 app.use(cookieParser());
 
 
@@ -94,12 +95,16 @@ app.get('/get_details/:email', async (request, response)=>{
 
 // SALES MANAGER API
 app.get('/sales',authenticateUser('Senior Manager'), (req,res)=>{
-    return res.status(200).json({message:"You have reached senior manager dashboard"})
+    res.header('Access-Control-Allow-Origin', 'http://localhost:5500');
+  res.header('Access-Control-Allow-Credentials', 'true');
+    return res.status(200).redirect('http://localhost:5173/sales')
 })
 
 // JUNIOR MANAGER API
 app.get('/sales_jm',(req,res)=>{
     const {email}=req.body
+    res.header('Access-Control-Allow-Origin', 'http://localhost:5500');
+    res.header('Access-Control-Allow-Credentials', 'true')
     return res.status(200).json({message:`Hello Junior Manager, ${email}`})
 })
 
@@ -120,7 +125,7 @@ return (req,res,next)=>{
                         }
                     else
                     {
-                        return res.redirect('/sales_jm')
+                        return res.redirect('http://localhost:5173/sales_jm')
                     }
                 }
         }   

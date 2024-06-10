@@ -14,7 +14,7 @@ const Register = () => {
     const validate=async(email)=>{
     const res = await axios.get(`http://localhost:5500/get_details/${email}`)
     console.log(res)
-    return res.data
+    return res.data[0].email
   }
 
 
@@ -24,12 +24,11 @@ const Register = () => {
             const result = await validate(email)  
             if(result)
             {  
-              if(result==email) 
+              if(result===email) 
                 {
                   await createUserWithEmailAndPassword(auth,email,pass)
                   const user = auth.currentUser
                   const tkn = await axios.post("http://localhost:5500/get_token",{email:email})
-                    
                   if(tkn) 
                     navigate("/profile")
                 }
